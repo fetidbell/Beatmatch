@@ -3,75 +3,14 @@ import ReactDOM from 'react-dom';
 import Tone from 'tone';
 import './index.css';
 
-var synth = new Tone.Synth().toMaster();
-
-// Tone.Transport.bpm.value = 60;
-// Tone.Transport.scheduleRepeat(function(time){
-// 	synth.triggerAttackRelease('C2', '16n');
-// }, "4n");
-// Tone.Transport.start();
-
-class Note extends React.Component {
+class App extends React.Component {
 
 	render() {
 		return (
-			<div className="note"></div>
-		);
-	}
-}
-
-class Track extends React.Component {
-	render() {
-		return (
-			<div className="track">
-				<Note />
-				<Note />
-				<Note />
-				<Note />
-				<Note />
-				<Note />
-				<Note />
-				<Note />
+			<div className="App">
+				<Sequencer />
 			</div>
-		);
-	}
-}
-
-class TrackNotes extends React.Component {
-
-	render() {
-		return (
-			<div className="sequencer-tracknotes">
-				<Track />
-				<Track />
-				<Track />
-				<Track />
-			</div>
-		);
-	}
-}
-
-class TrackNames extends React.Component {
-	render() {
-		return (
-			<div className="sequencer-tracknames">
-				<h2>TrackName</h2>
-				<h2>TrackName</h2>
-				<h2>TrackName</h2>
-				<h2>TrackName</h2>
-			</div>
-		);
-	}
-}
-
-class SequencerButtons extends React.Component {
-	render() {
-		return (
-			<div className="sequencer-buttons">
-				<button>Play/stop</button>
-				<button>Confirm</button>
-			</div>
-		);
+  		);
 	}
 }
 
@@ -116,14 +55,85 @@ class Task extends React.Component {
 	}
 }
 
-class App extends React.Component {
+class TrackNames extends React.Component {
 
 	render() {
 		return (
-			<div className="App">
-				<Sequencer />
+			<div className="sequencer-tracknames">
+				<h2>Kick</h2>
+				<h2>Snare</h2>
+				<h2>Hi-hat</h2>
+				<h2>Crash</h2>
 			</div>
-  		);
+		);
+	}
+}
+
+class TrackNotes extends React.Component {
+
+	render() {
+		return (
+			<div className="sequencer-tracknotes">
+				<Playhead />
+				<Track />
+				<Track />
+				<Track />
+				<Track />
+			</div>
+		);
+	}
+}
+
+class Playhead extends React.Component {
+	render() {
+		return (
+			<div className="sequencer-tracknotes-playhead"></div>
+		);
+	}
+}
+
+class Track extends React.Component {
+	render() {
+		return (
+			<div className="track">
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+				<Note />
+			</div>
+		);
+	}
+}
+
+class Note extends React.Component {
+
+	render() {
+		return (
+			<div className="note"></div>
+		);
+	}
+}
+
+class SequencerButtons extends React.Component {
+	render() {
+		return (
+			<div className="sequencer-buttons">
+				<button>Play/stop</button>
+				<button>Confirm</button>
+			</div>
+		);
 	}
 }
 
