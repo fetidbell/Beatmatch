@@ -8,7 +8,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 30px 20px 50px 20px;
+	padding: 100px 20px 50px 20px;
 }
 
 .App {
@@ -46,7 +46,9 @@
 	border-top-right-radius: 20px;
 	font-size: 20px;
 	font-weight: 500;
-	background: #dbdbdb;
+	background-image: url(/icon-audio.png);
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .sequencer-tracks {
@@ -102,6 +104,15 @@
 	border-radius: 7px;
 	box-shadow: 1px 1px 1px 1px #000;
 	background-image: linear-gradient(45deg, #16b6f7, #339fcc);
+}
+
+.note-pushed {
+	width: 60px;
+	height: 60px;
+	margin: 5px 5px;
+	border-radius: 7px;
+	box-shadow: 1px 1px 1px 1px #000;
+	background-image: linear-gradient(45deg, #ffbe75, #ff8905);
 }
 
 .sequencer-buttons {
