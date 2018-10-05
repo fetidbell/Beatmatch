@@ -3,6 +3,46 @@ import ReactDOM from 'react-dom';
 import Tone from 'tone';
 import './index.css';
 
+//Kick		http://d.zaix.ru/8UoS.mp3
+//Snare		http://d.zaix.ru/8UoT.mp3
+//Hi-hat		http://d.zaix.ru/8UoU.mp3
+//Crash		http://d.zaix.ru/8UoV.mp3
+
+var drums = new Tone.Players({
+	"Kick": "http://d.zaix.ru/8UoS.mp3",
+	"Snare": "http://d.zaix.ru/8UoT.mp3",
+	"HiHat": "http://d.zaix.ru/8UoU.mp3"
+}).toMaster();
+
+var loop = new Tone.Sequence(function(time, drum) {
+	drums.get(drum).start(time, 0, "8n", 0);
+}, [["Kick", "Kick"], "Snare"], "4n");
+
+var hiHatloop = new Tone.Sequence(function(time, drum) {
+	drums.get(drum).start(time, 0, "4n", 0);
+}, ["HiHat"], "8n");
+
+function play() {
+	console.log('play');
+	loop.start();
+	hiHatloop.start();
+}
+
+function stop() {
+	console.log('stop');
+	loop.stop();
+	hiHatloop.stop();
+}
+
+Tone.Transport.bpm.value = 68;
+Tone.Transport.start();
+
+var buttPlay = document.getElementById('play');
+buttPlay.onclick = play;
+
+var buttStop = document.getElementById('stop');
+buttStop.onclick = stop;
+
 class App extends React.Component {
 
 	render() {
@@ -46,10 +86,18 @@ class Status extends React.Component {
 
 class Task extends React.Component {
 
+	playTask() {
+		var task = new Tone.Player({
+			url: "http://d.zaix.ru/8TRz.mp3",
+			loop: false,
+			onload: function(){task.start()}
+		}).toMaster();
+	}
+
 	render() {
 		return (
 			<div className="sequencer-task">
-				<button>Task button</button>
+				<button onClick={this.playTask}>Task button</button>
 			</div>
 		);
 	}
@@ -119,9 +167,24 @@ class Track extends React.Component {
 
 class Note extends React.Component {
 
+	constructor() {
+		super();
+		this.className = "note";
+	}
+
+	componentDidMount() {
+		this.setState({pushed: false});
+	}
+
+	push() {
+		var isPushed = this.state.pushed;
+		this.className = (!isPushed) ? "note-pushed" : "note";
+		this.setState({pushed: !isPushed});
+	}
+
 	render() {
 		return (
-			<div className="note"></div>
+			<div className={this.className} onClick={this.push.bind(this)}></div>
 		);
 	}
 }
